@@ -90,89 +90,96 @@ function Login(props) {
   });
 
   return (
-    <div className="login-form login-signin" id="kt_login_signin_form">
-      {/* begin::Head */}
-      <div className="text-center mb-10 mb-lg-20">
-        <h3 className="font-size-h1">
-          <FormattedMessage id="AUTH.LOGIN.TITLE" />
-        </h3>
-        <p className="text-muted font-weight-bold">
-          Enter your username and password
-        </p>
-      </div>
-      {/* end::Head */}
+    
+<div className="login login-signin-on login-3 d-flex flex-row-fluid" id="kt_login">
+    <div className="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style={{ backgroundImage: 'url(assets/media/bg/bg-3.jpg)' }}>
+        <div className="login-form  p-7 position-relative overflow-hidden">
+            {/*begin::Login Header*/}
+            <div className="d-flex flex-center mb-15">
+                <a href="#">
+                    <img src="assets/media/logos/logo-letter-13.png" className="max-h-75px" alt="" />
+                </a>
+            </div>
+            {/*end::Login Header*/}
+            {/*begin::Login Sign in form*/}
+            <div className="card card-custom">
+                <div className="card-header card-header-tabs-line">
+                    <div className="card-body">
+                        <div className="login-signin">
+                            <div className="mb-20 text-center">
+                                <h3>Sign In to eMPower</h3>
+                                <div className="text-muted font-weight-bold"><span className="opacity-70 ">New Here ?</span>
+                                    <a href="javascript:;" id="kt_login_signup" className="font-weight-bold">Create an Account</a></div>
+                            </div>
+                            <form
+                                onSubmit={formik.handleSubmit}
+                                className="form fv-plugins-bootstrap fv-plugins-framework"
+                            >
 
-      {/*begin::Form*/}
-      <form
-        onSubmit={formik.handleSubmit}
-        className="form fv-plugins-bootstrap fv-plugins-framework"
-      >
-        {formik.status ? (
-          <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-            <div className="alert-text font-weight-bold">{formik.status}</div>
-          </div>
-        ) : (
-          <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
-            <div className="alert-text ">
-              Use account <strong>admin@demo.com</strong> and password{" "}
-              <strong>demo</strong> to continue.
-            </div>
-          </div>
-        )}
+                                <div className="form-group mb-5 pull-left">
+                                    <label className="control-label font-weight-bold">Email</label>
+                                    <input
+                                        placeholder="Email"
+                                        type="email"
+                                        className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                            "email"
+                                        )}`}
+                                        name="email"
+                                        {...formik.getFieldProps("email")}
+                                    />
+                                    {formik.touched.email && formik.errors.email ? (
+                                        <div className="fv-plugins-message-container">
+                                            <div className="fv-help-block">{formik.errors.email}</div>
+                                        </div>
+                                    ) : null}
 
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Email"
-            type="email"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "email"
-            )}`}
-            name="email"
-            {...formik.getFieldProps("email")}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.email}</div>
+                                </div>
+                                <div className="form-group mb-5">
+                                    <div className=" d-flex flex-wrap justify-content-between ">
+                                        <label className="control-label font-weight-bold">Password</label>
+                                        <Link
+                                            to="/auth/forgot-password"
+                                            className="text-dark-50 text-hover-primary my-3 mr-2"
+                                            id="kt_login_forgot"
+                                        >
+                                            <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
+                                        </Link>
+                                    </div>
+                                    <input
+                                        placeholder="Password"
+                                        type="password"
+                                        className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                            "password"
+                                        )}`}
+                                        name="password"
+                                        {...formik.getFieldProps("password")}
+                                    />
+                                    {formik.touched.password && formik.errors.password ? (
+                                        <div className="fv-plugins-message-container">
+                                            <div className="fv-help-block">{formik.errors.password}</div>
+                                        </div>
+                                    ) : null}
+                                </div>
+                                <div className="text-center">
+                                    <button
+                                        id="kt_login_signin_submit" className="btn  btn-primary font-weight-bold px-9 py-4 my-3 mx-4"
+                                        type="submit"
+                                        disabled={formik.isSubmitting}
+
+                                    >
+                                        <span>Sign In</span>
+                                        {loading && <span className="ml-3 spinner spinner-white"></span>}
+                                    </button>
+                                </div></form>
+                        </div></div></div>
+                {/*end::Login Sign in form*/}
+
             </div>
-          ) : null}
         </div>
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Password"
-            type="password"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "password"
-            )}`}
-            name="password"
-            {...formik.getFieldProps("password")}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.password}</div>
-            </div>
-          ) : null}
-        </div>
-        <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
-          <Link
-            to="/auth/forgot-password"
-            className="text-dark-50 text-hover-primary my-3 mr-2"
-            id="kt_login_forgot"
-          >
-            <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
-          </Link>
-          <button
-            id="kt_login_signin_submit"
-            type="submit"
-            disabled={formik.isSubmitting}
-            className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
-          >
-            <span>Sign In</span>
-            {loading && <span className="ml-3 spinner spinner-white"></span>}
-          </button>
-        </div>
-      </form>
-      {/*end::Form*/}
     </div>
+    {/*end::Login*/}
+</div>
+
   );
 }
 
